@@ -19,7 +19,7 @@ namespace Implementation.UseCases.Queries
 
         public string Name => "Search Users";
 
-        public PagedResponse<UserDto> Execute(UserSearch search)
+        public PagedResponse<UserDto> Execute(SearchKeyword search)
         {
             var query = Context.Users.Where(x => x.IsActive == true).AsQueryable();
 

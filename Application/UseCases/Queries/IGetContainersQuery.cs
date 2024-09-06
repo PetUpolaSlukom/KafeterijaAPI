@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Queries
 {
-    public interface IGetContainersQuery : IQuery<PagedResponse<ContainterDto>, ContainerSearch>
+    public interface IGetContainersQuery : IQuery<PagedResponse<ContainterDto>, SearchKeyword>
     {
     }
 }

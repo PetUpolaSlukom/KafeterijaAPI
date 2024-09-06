@@ -83,7 +83,7 @@ namespace API.Controllers
                 _useCaseHandler.HandleCommand(command, dto);
                 return StatusCode(201);
             }
-            catch (FluentValidation.ValidationException ex)
+            catch (ValidationException ex)
             {
                 return UnprocessableEntity(ex.Errors.Select(x => new
                 {

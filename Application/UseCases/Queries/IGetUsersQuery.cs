@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Queries
 {
-    public interface IGetUsersQuery : IQuery<PagedResponse<UserDto>, UserSearch>
+    public interface IGetUsersQuery : IQuery<PagedResponse<UserDto>, SearchKeyword>
     {
     }
 }

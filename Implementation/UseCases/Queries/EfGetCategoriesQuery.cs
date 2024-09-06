@@ -19,7 +19,7 @@ namespace Implementation.UseCases.Queries
 
         public string Name => "Search Categories";
 
-        public PagedResponse<CategoryDto> Execute(CategorySearch search)
+        public PagedResponse<CategoryDto> Execute(SearchKeyword search)
         {
             var query = Context.Categories.Where(x => x.IsActive == true).AsQueryable();
 

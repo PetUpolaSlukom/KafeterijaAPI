@@ -1,14 +1,12 @@
-﻿ using API.Extensions;
+﻿using API.Extensions;
 using Application.DTO;
-using Application.UseCases.Commands.Categories;
-using Application.UseCases.Commands.Containers;
-using Application.UseCases.Commands.Products;
-using Application.UseCases.Queries;
+using Application.UseCases.Commands.CartItems;
+using Application.UseCases.Commands.Orders;
+using Application.UseCases.Commands.Packing;
 using DataAccess;
 using Domain;
 using FluentValidation;
 using Implementation;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,33 +15,34 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private UseCaseHandler _useCaseHandler;
         private Context _context;
 
-        public ProductsController(UseCaseHandler commandHandler, Context context)
+        public OrderController(UseCaseHandler commandHandler, Context context)
         {
             _useCaseHandler = commandHandler;
             _context = context;
         }
 
-        // GET: api/<ProductsController>
+        // GET: api/<OrderController>
         [HttpGet]
-        [HttpGet]
-        public IActionResult Get([FromQuery] SearchKeyword search, [FromServices] IGetProductsQuery query)
-            => Ok(_useCaseHandler.HandleQuery(query, search));
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
 
-        // GET api/<ProductsController>/5
+        // GET api/<OrderController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        [Authorize]
+        // POST api/<OrderController>
         [HttpPost]
-        public IActionResult Post([FromBody] CreateProduct dto, [FromServices] ICreateProductCommand cmd)
+        public IActionResult Post([FromBody] CreateOrderDto dto, [FromServices] ICreateOrderCommand cmd)
         {
             try
             {
@@ -69,22 +68,22 @@ namespace API.Controllers
             }
         }
 
-        [Authorize]
+        // PUT api/<OrderController>/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UpdateProductDto dto, [FromServices] IUpdateProductsCommand command)
+        public IActionResult Put(int id, [FromBody] UpdateOrderDto dto, [FromServices] IUpdateOrderCommand command)
         {
             try
             {
                 dto.Id = id;
-                Product p = _context.Products.FirstOrDefault(p => p.Id == id);
-                if (p == null)
+                Order o = _context.Orders.FirstOrDefault(o => o.Id == id);
+                if (o == null)
                 {
                     return NotFound();
                 }
                 _useCaseHandler.HandleCommand(command, dto);
                 return StatusCode(201);
             }
-            catch (FluentValidation.ValidationException ex)
+            catch (ValidationException ex)
             {
                 return UnprocessableEntity(ex.Errors.Select(x => new
                 {
@@ -98,18 +97,10 @@ namespace API.Controllers
             }
         }
 
-        [Authorize]
+        // DELETE api/<OrderController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public void Delete(int id)
         {
-            Product p = _context.Products.Find(id);
-            if (p == null || p.IsActive == false)
-            {
-                return NotFound();
-            }
-            p.IsActive = false;
-            _context.SaveChanges();
-            return NoContent();
         }
     }
 }

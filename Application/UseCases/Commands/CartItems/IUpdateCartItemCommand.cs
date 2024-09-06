@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.UseCases.Queries
+namespace Application.UseCases.Commands.CartItems
 {
-    public interface IGetProductsQuery : IQuery<PagedResponse<ProductDto>, SearchKeyword>
+    public interface IUpdateCartItemCommand : ICommand<UpdateCartItemDto>
     {
     }
 }

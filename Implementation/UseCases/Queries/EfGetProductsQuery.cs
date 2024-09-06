@@ -19,7 +19,7 @@ namespace Implementation.UseCases.Queries
 
         public string Name => "Search products";
 
-        public PagedResponse<ProductDto> Execute(ProductSearch search)
+        public PagedResponse<ProductDto> Execute(SearchKeyword search)
         {
             var query = Context.Products.Where(x => x.IsActive == true).AsQueryable();
 

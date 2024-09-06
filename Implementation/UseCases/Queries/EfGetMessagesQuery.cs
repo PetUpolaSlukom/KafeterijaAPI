@@ -18,7 +18,7 @@ namespace Implementation.UseCases.Queries
 
         public string Name => "Get messages";
 
-        public PagedResponse<MessageDto> Execute(CategorySearch search)
+        public PagedResponse<MessageDto> Execute(SearchKeyword search)
         {
             var query = Context.Messages.Where(x => x.IsActive == true).AsQueryable();
 

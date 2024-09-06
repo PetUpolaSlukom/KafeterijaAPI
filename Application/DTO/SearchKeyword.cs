@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTO
 {
-    public class ProductSearch : PagedSearch
+    public class SearchKeyword : PagedSearch
     {
         public string Keyword { get; set; }
     }

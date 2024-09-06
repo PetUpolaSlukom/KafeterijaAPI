@@ -17,7 +17,7 @@ namespace Implementation.Validators
 
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .Matches("(?=.{4,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")
+                .Matches("^[A-ZČĆŽŠĐa-zčćžšđ]+(?:[-\\s][A-ZČĆŽŠĐa-zčćžšđ]+)*$")
                 .WithMessage("Invalid category format.")
                 .Must(x => !ctx.Categories.Any(c => c.Name == x))
                 .WithMessage("Category name already exist.");

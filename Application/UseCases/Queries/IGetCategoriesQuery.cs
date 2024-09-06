@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.UseCases.Queries
 {
-    public interface IGetCategoriesQuery : IQuery<PagedResponse<CategoryDto>, CategorySearch>
+    public interface IGetCategoriesQuery : IQuery<PagedResponse<CategoryDto>, SearchKeyword>
     {
     }
 }

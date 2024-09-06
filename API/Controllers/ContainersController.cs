@@ -29,7 +29,7 @@ namespace API.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Get([FromQuery] ContainerSearch search, [FromServices] IGetContainersQuery query)
+        public IActionResult Get([FromQuery] SearchKeyword search, [FromServices] IGetContainersQuery query)
             => Ok(_useCaseHandler.HandleQuery(query, search));
 
         // GET api/<ContainersController>/5

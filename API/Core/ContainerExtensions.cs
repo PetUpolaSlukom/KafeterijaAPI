@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.DTO;
 using Application.UseCases.Commands.Categories;
+using Application.UseCases.Commands.CartItems;
 using Application.UseCases.Commands.Users;
 using Implementation;
 using Implementation.Logging.UseCase;
@@ -18,6 +19,9 @@ using Implementation.UseCases.Commands.packings;
 using Application.UseCases.Commands.Packing;
 using Application.UseCases.Commands.Messages;
 using Implementation.UseCases.Commands.Messages;
+using Implementation.UseCases.Commands.CartItems;
+using Application.UseCases.Commands.Orders;
+using Implementation.UseCases.Commands.Orders;
 
 namespace API.Core
 
@@ -70,6 +74,17 @@ namespace API.Core
             services.AddTransient<ICreateMessageCommand, EfCreateMessageCommand>();
             services.AddTransient<CreateMessageValidation>();
             services.AddTransient<IGetMessageQuery, EfGetMessagesQuery>();
+
+            //CartItems
+            services.AddTransient<ICreateCartItemCommand, EfCreateCartItemCommand>();
+            services.AddTransient<CreateCartItemValidator>();
+            services.AddTransient<IUpdateCartItemCommand, EfUpdateCartItemCommand>();
+            services.AddTransient<UpdateCartItemValidator>();
+
+            //Order
+            services.AddTransient<ICreateOrderCommand, EfCreateOrderCommand>();
+            services.AddTransient<CreateOrderValidation>();
+            services.AddTransient<IUpdateOrderCommand, EfUpdateOrderCommand>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)

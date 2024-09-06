@@ -29,7 +29,7 @@ namespace API.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Get([FromQuery] CategorySearch search, [FromServices] IGetMessageQuery query)
+        public IActionResult Get([FromQuery] SearchKeyword search, [FromServices] IGetMessageQuery query)
             => Ok(_useCaseHandler.HandleQuery(query, search));
 
 

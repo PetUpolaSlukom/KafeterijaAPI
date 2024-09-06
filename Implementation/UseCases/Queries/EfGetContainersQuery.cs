@@ -20,7 +20,7 @@ namespace Implementation.UseCases.Queries
 
         public string Name => "Search Containers";
 
-        public PagedResponse<ContainterDto> Execute(ContainerSearch search)
+        public PagedResponse<ContainterDto> Execute(SearchKeyword search)
         {
             var query = Context.Containers.Where(x => x.IsActive == true).AsQueryable();
 

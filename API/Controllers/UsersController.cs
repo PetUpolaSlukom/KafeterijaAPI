@@ -28,7 +28,7 @@ namespace API.Controllers
 
         [Authorize]
         [HttpGet]
-        public IActionResult Get([FromQuery] UserSearch search, [FromServices] IGetUsersQuery query)
+        public IActionResult Get([FromQuery] SearchKeyword search, [FromServices] IGetUsersQuery query)
             => Ok(_useCaseHandler.HandleQuery(query, search));
 
 
